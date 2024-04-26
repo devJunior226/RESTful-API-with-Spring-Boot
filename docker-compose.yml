@@ -1,0 +1,22 @@
+# Use root/example as user/password credentials
+version: '3.1'
+services:
+  db:
+    image: mariadb:10.7
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+
+    ports:
+      # Le port par defaut est le 3306;
+      # Mais on veut qu'il s'ouvre sur le port 3307, d'ou ce mappage
+      - 3307:3306
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      # Le port par defaut est le 8080;
+      # Mais vu que l'api tourne sur le port 8080,
+      # alors il le mapper sur le port de adminer sur le 8081
+      - 8081:8080
